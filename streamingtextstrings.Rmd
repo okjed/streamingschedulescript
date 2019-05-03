@@ -18,7 +18,7 @@ sheets_deauth()
 sheets_email()
 
 sheetid <- "1Ga72YMOD5V038D_4GFYggbuVF-JDu3rOPxHHPaNHu-E"
-streaminglineup=read_sheet(sheetid,sheet="2019-05")
+streaminglineup=read_sheet(sheetid,sheet="Active")
 
 # Just look for the next 2 events - to populate fields for current talk and provide copy/paste material for setup of the next
 nextevents = streaminglineup %>% mutate(realdate=as.POSIXct(paste(format(Date,"%Y-%m-%d"),format(Time,"%H:%M")),tz="US/Central")) %>%
