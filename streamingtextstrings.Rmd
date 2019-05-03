@@ -1,0 +1,75 @@
+---
+title: "Streaming Text Strings"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+```{r setup, include=FALSE,echo=FALSE}
+
+#Question: Okay to just have an active sheet and an archive sheet instead of one for each month?
+
+
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(googlesheets4)
+
+# Streaming sheet is completely public so no auth or email is required
+sheets_deauth()
+sheets_email()
+
+sheetid <- "1Ga72YMOD5V038D_4GFYggbuVF-JDu3rOPxHHPaNHu-E"
+streaminglineup=read_sheet(sheetid,sheet="2019-05")
+
+# Just look for the next 2 events - to populate fields for current talk and provide copy/paste material for setup of the next
+nextevents = streaminglineup %>% filter(Date>=Sys.Date()) %>% arrange(Date) %>% top_n(-2,Date)
+# nextevents[1,"Group Name"]
+# nextevents[1,"Talk Title"]
+# nextevents[1,"Speaker Name"]
+
+# Simply provides day of the week for announcements for Twitch
+weekday=ifelse(nextevents[1,"Date"]==nextevents[2,"Date"],"today",weekdays(nextevents[[2,"Date"]]))
+ordinalday <- scales::ordinal(as.numeric(format(nextevents[[2,"Date"]],"%d")))
+month <- format(nextevents[[2,"Date"]],"%B")
+numberday = nextevents[2,"Date"]
+```
+## Formatted strings for next 2 events - current stream and for setup of following stream
+
+- Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
+- Speaker: `r nextevents[1,"Speaker Name"]`
+
+### After the stream ends, setup for the next:
+- Next Title: `r nextevents[2,"Talk Title - Speaker Name: Group Name"]`
+- Next Speaker: `r nextevents[2,"Speaker Name"]`
+
+## Twitch Chat Messages
+
+### Introductory Message:
+
+Welcome to `r nextevents[1,"Group Name"]`! Today we will be streaming "`r nextevents[1,"Talk Title"]` with `r nextevents[1,"Speaker Name"]`".
+
+### Twitch Subscription Message:
+
+If you have Amazon Prime, please consider using your free monthly Twitch subscription to subscribe to Techlahoma's Twitch channel each month! Here are the instructions on how to subscribe: https://www.techlahoma.org/announcements/2018/7/23/subscribe-to-techlahomas-twitch-channel
+
+### Asking for Questions:
+
+Any questions for `r nextevents[1,"Speaker Name"]`?
+
+Have a great question? The AV team would love to relay your question to the speaker - post 'em here!
+
+### Slack:
+
+Want to get involved with the Techlahoma Community? Join us on Slack! Check out our Code of Conduct and request an invite here: techlahoma.org/spaces
+
+### YouTube:
+
+Did you know that Techlahoma has a YouTube channel? Subscribe to get notifications when we upload videos! https://www.youtube.com/techlahoma
+
+### Ending Message:
+
+Thanks everyone for joining us today! We will be streaming again `r weekday`, `r month` `r ordinalday`, with `r nextevents[2,"Group Name"]`: "`r nextevents[2,"Talk Title"]` with `r nextevents[2,"Speaker Name"]`"
+
+Thanks for tuning in! Follow Techlahoma on Twitch and turn on notifications to get an email next time we go live! For news about the Techlahoma Foundation, follow us on Twitter! twitter.com/techlahoma
+
+Thanks for tuning in! Check out our calendar for other Techlahoma Usergroups! www.meetup.com/pro/techlahoma/
