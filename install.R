@@ -1,6 +1,7 @@
 ### install regular packages
 
-install.packages("tidyverse")
+#install.packages("tidyverse")
+install.packages("dplyr")
 install.packages(c("rmarkdown")) # for knitting
 
 ### install GitHub packages (tag = commit, branch or release tag)

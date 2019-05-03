@@ -11,7 +11,8 @@ output:
 
 
 knitr::opts_chunk$set(echo = FALSE)
-library(tidyverse)
+#library(tidyverse)
+library(dplyr)
 library(googlesheets4)
 
 # Streaming sheet is completely public so no auth or email is required
