@@ -1,9 +1,10 @@
 ---
 title: "Streaming Text Strings"
 output: html_document
+runtime: shiny
 ---
 
-```{r setup, include=FALSE,echo=FALSE}
+```{r setup, include=FALSE,echo=FALSE,cache=FALSE}
 
 #Question: Okay to just have an active sheet and an archive sheet instead of one for each month?
 
@@ -33,7 +34,8 @@ ordinalday <- scales::ordinal(as.numeric(format(nextevents[[2,"Date"]],"%d")))
 month <- format(nextevents[[2,"Date"]],"%B")
 numberday = nextevents[2,"Date"]
 ```
-## Formatted strings for next 2 events - current stream and for setup of following stream
+## Formatted strings for next 2 events
+### Current stream
 
 - Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
 - Speaker: `r nextevents[1,"Speaker Name"]`
