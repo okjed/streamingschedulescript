@@ -23,7 +23,8 @@ streaminglineup=read_sheet(sheetid,sheet="Active")
 
 # Just look for the next 2 events - to populate fields for current talk and provide copy/paste material for setup of the next
 nextevents = streaminglineup %>% mutate(realdate=as.POSIXct(paste(format(Date,"%Y-%m-%d"),format(Time,"%H:%M")),tz="US/Central")) %>%
-  filter(realdate>=Sys.time()) %>% arrange(realdate) %>% top_n(-2,realdate)
+  filter(`Streamed?` != "no") %>%
+  filter(realdate>=Sys.time()-7200) %>% arrange(realdate) %>% top_n(-2,realdate)
 # nextevents[1,"Group Name"]
 # nextevents[1,"Talk Title"]
 # nextevents[1,"Speaker Name"]
