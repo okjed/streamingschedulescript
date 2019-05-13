@@ -49,11 +49,11 @@ numberday = nextevents[2,"Date"]
 #### OBS
 
 - Next Title: `r nextevents[2,"Talk Title"]`
-- Next Speaker:  `r nextevents[1,"Speaker Name"]` | `r nextevents[1,"Group Name"]`
+- Next Speaker:  `r nextevents[2,"Speaker Name"]` | `r nextevents[2,"Group Name"]`
 
 #### Twitch
-- Next Stream Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
-- Next Go Live Notification: `r nextevents[1,"Group Name"]` is live on Twitch!
+- Next Stream Title: `r nextevents[2,"Talk Title - Speaker Name: Group Name"]`
+- Next Go Live Notification: `r nextevents[2,"Group Name"]` is live on Twitch!
 
 
 ## Twitch Chat Messages
