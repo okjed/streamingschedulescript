@@ -37,13 +37,24 @@ numberday = nextevents[2,"Date"]
 ```
 ## Formatted strings for next 2 events
 ### Current stream
+#### OBS
+- Current Title: `r nextevents[1,"Talk Title"]`
+- Current Speaker: `r nextevents[1,"Speaker Name"]` | `r nextevents[1,"Group Name"]`
 
-- Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
-- Speaker: `r nextevents[1,"Speaker Name"]`
+#### Twitch
+- Current Stream Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
+- Current Go Live Notification: `r nextevents[1,"Group Name"]` is live on Twitch!
 
-### After the stream ends, setup for the next:
-- Next Title: `r nextevents[2,"Talk Title - Speaker Name: Group Name"]`
-- Next Speaker: `r nextevents[2,"Speaker Name"]`
+### Next stream:
+#### OBS
+
+- Next Title: `r nextevents[2,"Talk Title"]`
+- Next Speaker:  `r nextevents[1,"Speaker Name"]` | `r nextevents[1,"Group Name"]`
+
+#### Twitch
+- Next Stream Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
+- Next Go Live Notification: `r nextevents[1,"Group Name"]` is live on Twitch!
+
 
 ## Twitch Chat Messages
 
