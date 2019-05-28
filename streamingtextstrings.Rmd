@@ -45,6 +45,10 @@ numberday = nextevents[2,"Date"]
 - Current Stream Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
 - Current Go Live Notification: `r nextevents[1,"Group Name"]` is live on Twitch!
 
+#### Snaz
+- Current Event Date: `r nextevents[1,"Date"]`
+- Current Event Time: `r format(nextevents[[1,"Time"]],"%H:%M")`
+
 ### Next stream:
 #### OBS
 
@@ -55,6 +59,9 @@ numberday = nextevents[2,"Date"]
 - Next Stream Title: `r nextevents[2,"Talk Title - Speaker Name: Group Name"]`
 - Next Go Live Notification: `r nextevents[2,"Group Name"]` is live on Twitch!
 
+#### Snaz
+- Next Event Date: `r nextevents[2,"Date"]`
+- Next Event Time: `r format(nextevents[[2,"Time"]],"%H:%M")`
 
 ## Twitch Chat Messages
 
@@ -87,3 +94,8 @@ Thanks everyone for joining us today! We will be streaming again `r weekday`, `r
 Thanks for tuning in! Follow Techlahoma on Twitch and turn on notifications to get an email next time we go live! For news about the Techlahoma Foundation, follow us on Twitter! twitter.com/techlahoma
 
 Thanks for tuning in! Check out our calendar for other Techlahoma Usergroups! www.meetup.com/pro/techlahoma/
+
+
+### Extras
+- Streaming Details comes from the [Streaming Schedule](https://docs.google.com/spreadsheets/d/1Ga72YMOD5V038D_4GFYggbuVF-JDu3rOPxHHPaNHu-E/edit#gid=537074142)
+- Please double check the [streaming instructions](https://github.com/techlahoma/broadcasting/blob/master/Streaming/Streaming-Instructions.md) if you have any questions
