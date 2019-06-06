@@ -18,12 +18,20 @@ library(googlesheets4)
 sheets_deauth()
 sheets_email()
 
+# Get the upcoming streaming events
 sheetid <- "1Ga72YMOD5V038D_4GFYggbuVF-JDu3rOPxHHPaNHu-E"
-streaminglineup=read_sheet(sheetid,sheet="Active")
+streaminglineup <- read_sheet(sheetid,sheet="Active")
+
+# Get the results from the speaker form to provide extra information
+speakerformid <- "10d-1TowAgA2WIqUawxwet9GRmhd2XI8zKxREzxqOuyY"
+speakerinformation <- read_sheet(speakerformid,sheet="Active")
+
+# Join the info
+streaminglineup <- streaminglineup %>% left_join(speakerinformation,by=c("Speaker Name","Talk Title","Group Name"))
 
 # Just look for the next 2 events - to populate fields for current talk and provide copy/paste material for setup of the next
 nextevents = streaminglineup %>% mutate(realdate=as.POSIXct(paste(format(Date,"%Y-%m-%d"),format(Time,"%H:%M")),tz="US/Central")) %>%
-  filter(`Streamed?` != "no") %>%
+  filter(`Streamed?` == "yes") %>%
   filter(realdate>=Sys.time()-7200) %>% arrange(realdate) %>% top_n(-2,realdate)
 # nextevents[1,"Group Name"]
 # nextevents[1,"Talk Title"]
@@ -34,6 +42,27 @@ weekday=ifelse(nextevents[1,"Date"]==nextevents[2,"Date"],"today",weekdays(nexte
 ordinalday <- scales::ordinal(as.numeric(format(nextevents[[2,"Date"]],"%d")))
 month <- format(nextevents[[2,"Date"]],"%B")
 numberday = nextevents[2,"Date"]
+
+
+# Craft the extra information
+if (is.na(nextevents[1,"Speaker's Bio"])) {
+  bio <- ""
+} else {
+  bio <- paste0("### Speaker Bio\n",nextevents[1,"Speaker's Bio"])
+}
+
+if (is.na(nextevents[1,"Links to Share"])) {
+  links <- ""
+} else {
+  links <- paste0("### Links to Share\n",nextevents[1,"Links to Share"])
+}
+  
+if (is.na(nextevents[1,"Summary/Abstract/Outline"])) {
+  abstract <- ""
+} else {
+  abstract <- paste0("### Summary/Abstract/Outline\n",nextevents[1,"Summary/Abstract/Outline"])
+}
+
 ```
 ## Formatted strings for next 2 events
 ### Current stream
@@ -45,6 +74,13 @@ numberday = nextevents[2,"Date"]
 - Current Stream Title: `r nextevents[1,"Talk Title - Speaker Name: Group Name"]`
 - Current Go Live Notification: `r nextevents[1,"Group Name"]` is live on Twitch!
 
+  * Set Tags appropriately. 
+    * Recommended: `Educational`, `Software Development`, `Tutorial`, `Web Development`
+    * If there are more applicable [Tags](https://www.twitch.tv/directory/all/tags) in future, adjust  accordingly
+    * `3D Printing`, `Engineering`, and `Robotics` may apply for OKC OSH
+    * `Design` and `Graphic Design`, especially for OKC Design Tech
+    * `Game Development` for OK Game Devs
+    
 #### Snaz
 - Current Event Date: `r nextevents[1,"Date"]`
 - Current Event Time: `r format(nextevents[[1,"Time"]],"%H:%M")`
@@ -72,6 +108,10 @@ Welcome to `r nextevents[1,"Group Name"]`! Today we will be streaming "`r nextev
 ### Twitch Subscription Message:
 
 If you have Amazon Prime, please consider using your free monthly Twitch subscription to subscribe to Techlahoma's Twitch channel each month! Here are the instructions on how to subscribe: https://www.techlahoma.org/announcements/2018/7/23/subscribe-to-techlahomas-twitch-channel
+
+`r bio`
+`r links`
+`r abstract`
 
 ### Asking for Questions:
 
