@@ -6,6 +6,8 @@ are underway. Until then, this presents crafted fields for populating the variou
 documented within the
 [streaming instructions](https://github.com/techlahoma/broadcasting/blob/master/Streaming/Streaming-Instructions.md).
 
+Currently it is hosted at shinyapps.io and deployed via `rsconnect::deployDoc("streamingtextstrings.Rmd")` It can easily be hosted on any [Shiny server](https://www.rstudio.com/products/shiny/shiny-server/).
+
 ## Please Consider Opportunities to Help and Learn
 - [Additional opportunities in broadcasting](https://github.com/techlahoma/broadcasting/issues)
 - [Additional opportunities within Techlahoma](https://github.com/techlahoma/help-wanted/issues)
